@@ -97,7 +97,7 @@ def validate_start_conditions(player_name, players):
 def game_init():
     """
     Setup a game state, loop over to add players to the game. Creating a list of players.
-    It validates if a players name is valid (a-zA-Z and unique)
+    It validates if a players name is valid (not 0-9 and unique)
     """
     ready = False
     players = []
@@ -106,7 +106,7 @@ def game_init():
         print("Enter player name: ")
         player_name = input()
 
-        while not validate_name(player_name, players):
+        while not validate_start_conditions(player_name, players):
             player_name = input()
         
         if player_name == "!":
@@ -114,7 +114,15 @@ def game_init():
         else:
             a_player = create_player(player_name)
             players.append(a_player)
+    print("Game setup!")
     return players
+
+def welcome():
+    """
+    This method is responsible for printing the welcome banner to the screen
+    """
+    welcome_message = open("welcome_banner.txt", "r", encoding="utf-8")
+    print(welcome_message.read())
 
 def main():
     """
@@ -122,34 +130,10 @@ def main():
 
     The function welcomes the players
     """
-    text = '''
-░██╗░░░░░░░██╗███████╗██╗░░░░░░█████╗░░█████╗░███╗░░░███╗███████╗  ████████╗░█████╗░  ███████╗██╗░░██╗
-░██║░░██╗░░██║██╔════╝██║░░░░░██╔══██╗██╔══██╗████╗░████║██╔════╝  ╚══██╔══╝██╔══██╗  ██╔════╝██║░██╔╝
-░╚██╗████╗██╔╝█████╗░░██║░░░░░██║░░╚═╝██║░░██║██╔████╔██║█████╗░░  ░░░██║░░░██║░░██║  ██████╗░█████═╝░
-░░████╔═████║░██╔══╝░░██║░░░░░██║░░██╗██║░░██║██║╚██╔╝██║██╔══╝░░  ░░░██║░░░██║░░██║  ╚════██╗██╔═██╗░
-░░╚██╔╝░╚██╔╝░███████╗███████╗╚█████╔╝╚█████╔╝██║░╚═╝░██║███████╗  ░░░██║░░░╚█████╔╝  ██████╔╝██║░╚██╗
-░░░╚═╝░░░╚═╝░░╚══════╝╚══════╝░╚════╝░░╚════╝░╚═╝░░░░░╚═╝╚══════╝  ░░░╚═╝░░░░╚════╝░  ╚═════╝░╚═╝░░╚═╝
-
-                ██████╗░██╗░█████╗░███████╗  ░██████╗░░█████╗░███╗░░░███╗███████╗
-                ██╔══██╗██║██╔══██╗██╔════╝  ██╔════╝░██╔══██╗████╗░████║██╔════╝
-                ██║░░██║██║██║░░╚═╝█████╗░░  ██║░░██╗░███████║██╔████╔██║█████╗░░
-                ██║░░██║██║██║░░██╗██╔══╝░░  ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░
-                ██████╔╝██║╚█████╔╝███████╗  ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗
-                ╚═════╝░╚═╝░╚════╝░╚══════╝  ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝
-                
-                                Enter player names!
-                                Enter ! to start game'''
-    # player = create_player("Keagan")
-    # score = turn(player)
-    # player.score = score
-    # print(player.score)
-    print(text)
+    welcome()
     players = game_init()
-    print("Game setup!")
     for player in players:
         print(player.name)
-
-
 
 if __name__ == "__main__":
     main()

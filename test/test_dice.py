@@ -1,7 +1,7 @@
 
 import pytest
 
-from dice import create_player, turn, Player
+from dice import create_player, turn, Player, validate_start_conditions
 
 def test_create_player():
     """
@@ -29,6 +29,18 @@ def test_turn():
     player = create_player("Jim")
     score = turn(player)
     assert score == 1
+
+def test_validate_start_conditions():
+    """
+    Test the validate_start_conditions function for various scenarios.
+    """
+    players = []
+    assert validate_start_conditions("Player3", players)  # Valid name
+    assert not validate_start_conditions("", players)      # Blank name
+    assert not validate_start_conditions("123", players)   # Name with numbers
+    players.append()
+    assert not validate_start_conditions("Player1", players)  # Duplicate name
+    assert not validate_start_conditions("!", players)     # Minimum players not met
 
 if __name__ == "__main__":
     pytest.main()
