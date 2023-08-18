@@ -84,7 +84,7 @@ def roll_to_dictionary(roll):
             roll_face_count[5] += 1
         else:
             roll_face_count[6] += 1
-        return roll_face_count
+    return roll_face_count
 
 def dice_tally(score, roll_face, dice_left, player):
     """
@@ -158,9 +158,8 @@ def dice_tally(score, roll_face, dice_left, player):
         combined_roll = dictionary_to_roll(new_and_old_roll)
         print(f"Current score {temp_score}")
         print(f"Your combined roll results: {combined_roll}")
-        new_score = dice_tally(score, new_and_old_roll, dice_left, player)
+        return dice_tally(score, new_and_old_roll, dice_left, player)
 
-        return new_score
     else:
         return score
 
